@@ -19,7 +19,7 @@ namespace MIAUDOTE.DAO
             {
                 using (var conexao = Banco.ObterConexao())
                 {
-                    string sql = "INSERT INTO usuarios (nome_usuario, email, senha) VALUES (@nome, @email, @senha)";
+                    string sql = "INSERT INTO usuarios (nome, email, senha) VALUES (@nome, @email, @senha)";
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
                         cmd.Parameters.AddWithValue("@nome", usuario.Nome);
@@ -30,9 +30,9 @@ namespace MIAUDOTE.DAO
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("erro ao inserir usuário: " + ex.Message);
+                throw;
             }
         }
 
@@ -42,7 +42,7 @@ namespace MIAUDOTE.DAO
             {
                 using (var conexao = Banco.ObterConexao())
                 {
-                    string sql = "SELECT * FROM usuarios WHERE nome_usuario = @nome";
+                    string sql = "SELECT * FROM usuarios WHERE nome = @nome";
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
                         cmd.Parameters.AddWithValue("@nome", nomeUsuario);
@@ -53,7 +53,7 @@ namespace MIAUDOTE.DAO
                                 return new Usuario
                                 {
                                     Id = reader.GetInt32("id"),
-                                    Nome = reader.GetString("nome_usuario"),
+                                    Nome = reader.GetString("nome"),
                                     Email = reader.GetString("email"),
                                     Senha = reader.GetString("senha")
                                 };
@@ -62,9 +62,9 @@ namespace MIAUDOTE.DAO
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao buscar usuário: " + ex.Message);
+                throw;
             }
 
             return null;

@@ -10,6 +10,7 @@ namespace MIAUDOTE.Models
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
+        public int AnimalId { get; set; }
         public string TipoOperacao { get; set; }
         public string Descricao { get; set; }
         public DateTime DataOperacao { get; set; }

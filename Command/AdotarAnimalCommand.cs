@@ -27,8 +27,8 @@ namespace MIAUDOTE.Command
 
         public void Executar()
         {
-            animalDAO.Remover(animal.Id);
-            movimentoDAO.RegistrarMovimento(usuarioId, "Adoção", Descricao);
+            animalDAO.MarcarComoAdotado(animal.Id);
+            movimentoDAO.RegistrarMovimento(usuarioId, animal.Id, "Adoção", Descricao);
 
             var movimentos = movimentoDAO.ListarPorUsuario(usuarioId);
             movimentoRegistradoId = movimentos.Last().Id;
@@ -36,7 +36,7 @@ namespace MIAUDOTE.Command
 
         public void Desfazer()
         {
-            animalDAO.Inserir(animal);
+            animalDAO.DesmarcarAdocao(animal.Id);
 
             if (movimentoRegistradoId > 0)
             {

@@ -68,6 +68,9 @@ namespace MIAUDOTE
             {
                 dao.Inserir(novoUsuario);
                 MessageBox.Show("Usuário cadastrado com sucesso!");
+                this.Hide();
+                Adocao adocaoForm = new Adocao(novoUsuario);
+                adocaoForm.ShowDialog(); // Exibe o formulário de adoção como modal
                 this.Close();
             }
             catch (Exception ex)

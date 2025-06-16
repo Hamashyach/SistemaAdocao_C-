@@ -23,46 +23,55 @@ namespace MIAUDOTE
 
         private Adocao adocaoForm;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonLogin_Click(object sender, EventArgs e)
         {
             string usuario = textBox1.Text.Trim();
             string senha = textBox2.Text;
 
             Ilogin login = new ProxyLogin(new Proxy.Login());
-            bool sucesso = login.Autenticar(usuario, senha);
 
-            if (sucesso)
+            try
             {
-                Usuario logado = new UsuarioDao().BuscarPorNome(usuario);
-                MessageBox.Show("Bem vindo ao MiauDote! Vamos encontrar um amiguinho novo para voce" + logado.Nome);
+                bool sucesso = login.Autenticar(usuario, senha); 
 
-                this.Hide();
-                if (adocaoForm == null || adocaoForm.IsDisposed)
+                if (sucesso)
                 {
-                    adocaoForm = new Adocao(logado);
-                    adocaoForm.FormClosed += (s, args) => adocaoForm = null;
-                    adocaoForm.ShowDialog();
+                    Usuario logado = new UsuarioDao().BuscarPorNome(usuario);
+                    MessageBox.Show("Bem vindo ao MiauDote! Vamos encontrar um amiguinho novo para voce, " + logado.Nome); // Adicionado ", " para melhor leitura
+
+                    this.Hide();
+                    if (adocaoForm == null || adocaoForm.IsDisposed)
+                    {
+                        adocaoForm = new Adocao(logado);
+                        adocaoForm.FormClosed += (s, args) => adocaoForm = null;
+                        adocaoForm.ShowDialog();
+                    }
+                    else
+                    {
+                        adocaoForm.Focus();
+                    }
                 }
                 else
                 {
-                    adocaoForm.Focus();
+                    
+                    MessageBox.Show("Usuário ou senha inválidos.");
                 }
-
             }
-            else
+            catch (ArgumentException ex) 
             {
-                MessageBox.Show("Usuário ou senha inválidos ou campos obrigatórios não preenchidos.");
+                MessageBox.Show(ex.Message); 
             }
-
-      
-
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Ocorreu um erro inesperado durante o login: " + ex.Message);
+            }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void ButtonSair_Click(object sender, EventArgs e)
         {
             this.Hide();
             inicial inicialForm= new inicial();
-            inicialForm.ShowDialog(); // Exibe o formulário de login como modal
+            inicialForm.ShowDialog(); 
             this.Close();
         }
 

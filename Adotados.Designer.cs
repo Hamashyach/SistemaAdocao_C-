@@ -28,20 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
+            this.dgvHistoricoMovimentos = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistoricoMovimentos)).BeginInit();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(273, 280);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 36);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnVoltar);
+            // 
+            // dgvHistoricoMovimentos
+            // 
+            this.dgvHistoricoMovimentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistoricoMovimentos.Location = new System.Drawing.Point(273, 139);
+            this.dgvHistoricoMovimentos.Name = "dgvHistoricoMovimentos";
+            this.dgvHistoricoMovimentos.Size = new System.Drawing.Size(240, 150);
+            this.dgvHistoricoMovimentos.TabIndex = 2;
             // 
             // Adotados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvHistoricoMovimentos);
+            this.Controls.Add(this.button1);
             this.Name = "Adotados";
             this.Text = "Adotados";
-            this.Load += new System.EventHandler(this.Adotados_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistoricoMovimentos)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dgvHistoricoMovimentos;
     }
 }

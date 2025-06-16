@@ -40,7 +40,7 @@ namespace MIAUDOTE
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonAdotar_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -67,9 +67,36 @@ namespace MIAUDOTE
             CarregarAnimais();
         }
 
-            void button2_Click(object sender, EventArgs e)
+            void buttonDesfazer_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (gerenciadorCommand.PodeDesfazer) // Verifica se há comandos para desfazer
+            {
+                gerenciadorCommand.DesfazerComando(); // Chama o método para desfazer
+                MessageBox.Show("Última ação desfeita com sucesso!");
+                CarregarAnimais(); // Recarrega a lista para refletir a mudança
+            }
+            else
+            {
+                MessageBox.Show("Não há ações para desfazer.");
+            }
+        }
+
+        private void buttonFechar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Histórico_Click(object sender, EventArgs e)
+        {
+            if (usuarioLogado != null)
+            {
+                Adotados historicoForm = new Adotados(usuarioLogado);
+                historicoForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Não há usuário logado para visualizar o histórico.");
+            }
         }
     }
 }

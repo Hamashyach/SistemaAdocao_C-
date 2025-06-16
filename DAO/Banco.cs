@@ -34,7 +34,7 @@ namespace MIAUDOTE.DAO
                     using (var comando = conexao.CreateCommand())
                     {
                         comando.CommandText = @"
-                        CREATE TABLE IF NOT EXISTS usuario (
+                        CREATE TABLE IF NOT EXISTS usuarios (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             nome VARCHAR(100),
                             email VARCHAR(100),
@@ -46,6 +46,7 @@ namespace MIAUDOTE.DAO
                             nome VARCHAR(100),
                             tipo VARCHAR(50),
                             idade INT,
+                            descricao VARCHAR(100),
                             adotado BOOLEAN DEFAULT FALSE
                         );
 
@@ -60,8 +61,13 @@ namespace MIAUDOTE.DAO
 
                         CREATE TABLE IF NOT EXISTS movimento (
                             id INT AUTO_INCREMENT PRIMARY KEY,
+                            id_usuario INT,
+                            id_animal INT,
+                            tipo_operacao VARCHAR(50),
                             descricao TEXT,
                             data_hora DATETIME
+                            FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+                            FOREIGN KEY (id_animal) REFERENCES animal(id)
                         );
                     ";
                         comando.ExecuteNonQuery();

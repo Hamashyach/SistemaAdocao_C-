@@ -9,7 +9,7 @@ namespace MIAUDOTE.DAO
 {
     public interface IMovimentoDAO
     {
-        void RegistrarMovimento(int usuarioId, string tipoOperacao, string descricao);
+        void RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao); // Adicione animalId
         List<Movimento> ListarPorUsuario(int usuarioId);
         void RemoverMovimento(int id);
     }

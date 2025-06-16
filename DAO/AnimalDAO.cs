@@ -16,13 +16,14 @@ namespace MIAUDOTE.DAO
         {
             using (var conexao = Banco.ObterConexao())
             {
-                string sql = "INSERT INTO animais (tipo, nome, raca, idade) VALUES (@tipo, @nome, @raca, @idade)";
+                string sql = "INSERT INTO animais (tipo, nome, raca, idade) VALUES (@tipo, @nome, @raca, @idade, @descricao)";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@tipo", animal.Tipo);
                     cmd.Parameters.AddWithValue("@nome", animal.Nome);
                     cmd.Parameters.AddWithValue("@raca", animal.Raca);
                     cmd.Parameters.AddWithValue("@idade", animal.Idade);
+                    cmd.Parameters.AddWithValue("descricao", animal.descricao);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -51,6 +52,7 @@ namespace MIAUDOTE.DAO
                         animal.Nome = reader.GetString("nome");
                         animal.Raca = reader.GetString("raca");
                         animal.Idade = reader.GetInt32("idade");
+                        animal.descricao = reader.GetString("descricao");
                         animal.Adotado = reader.GetBoolean("adotado");
                         lista.Add(animal);
                     }
@@ -83,6 +85,7 @@ namespace MIAUDOTE.DAO
                             animal.Nome = reader.GetString("nome");
                             animal.Raca = reader.GetString("raca");
                             animal.Idade = reader.GetInt32("idade");
+                            animal.descricao = reader.GetString("descricao");
                             animal.Adotado = reader.GetBoolean("adotado");
                             return animal;
                         }
@@ -116,6 +119,7 @@ namespace MIAUDOTE.DAO
                         animal.Nome = reader.GetString("nome");
                         animal.Raca = reader.GetString("raca");
                         animal.Idade = reader.GetInt32("idade");
+                        animal.descricao = reader.GetString("descricao");
                         animal.Adotado = reader.GetBoolean("adotado");
                         lista.Add(animal);
                     }

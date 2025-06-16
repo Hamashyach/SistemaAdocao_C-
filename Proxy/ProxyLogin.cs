@@ -21,8 +21,8 @@ namespace MIAUDOTE.Proxy
         {
             if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(senha))
             {
-                // Apenas retorna false, sem acoplar à UI
-                return false;
+                
+                throw new ArgumentException("Usuário e senha são obrigatórios.");
             }
 
             return _realLogin.Autenticar(usuario, senha);

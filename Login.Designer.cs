@@ -89,7 +89,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // button2
             // 
@@ -102,7 +102,7 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "Sair";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.button2.Click += new System.EventHandler(this.ButtonSair_Click);
             // 
             // Login
             // 

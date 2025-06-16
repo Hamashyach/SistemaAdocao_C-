@@ -21,7 +21,7 @@ namespace MIAUDOTE
         private Cadastro cadastroForm;
         private Login loginForm;
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ButtonCadastro_Click(object sender, EventArgs e)
         {
             this.Hide(); ;
             if (cadastroForm == null || cadastroForm.IsDisposed)

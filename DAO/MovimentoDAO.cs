@@ -11,14 +11,16 @@ namespace MIAUDOTE.DAO
 {
     public class MovimentoDAO : IMovimentoDAO
     {
-        public void RegistrarMovimento(int usuarioId, string tipoOperacao, string descricao)
+        public void RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao) // Atualize a assinatura
         {
             using (var conexao = Banco.ObterConexao())
             {
-                string sql = "INSERT INTO movimento (id_usuario, tipo_operacao, descricao, data_hora) VALUES (@usuarioId, @tipo, @desc, NOW())";
+                // Inclua id_animal no INSERT
+                string sql = "INSERT INTO movimento (id_usuario, id_animal, tipo_operacao, descricao, data_hora) VALUES (@usuarioId, @animalId, @tipo, @desc, NOW())";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
+                    cmd.Parameters.AddWithValue("@animalId", animalId); // Adicione este parâmetro
                     cmd.Parameters.AddWithValue("@tipo", tipoOperacao);
                     cmd.Parameters.AddWithValue("@desc", descricao);
                     cmd.ExecuteNonQuery();
@@ -43,6 +45,7 @@ namespace MIAUDOTE.DAO
                             {
                                 Id = reader.GetInt32("id"),
                                 UsuarioId = usuarioId,
+                                AnimalId = reader.GetInt32("id_animal"), // Leia o AnimalId
                                 TipoOperacao = reader.GetString("tipo_operacao"),
                                 Descricao = reader.GetString("descricao"),
                                 DataOperacao = reader.GetDateTime("data_hora")
