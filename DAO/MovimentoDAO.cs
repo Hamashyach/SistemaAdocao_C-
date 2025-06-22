@@ -11,7 +11,7 @@ namespace MIAUDOTE.DAO
 {
     public class MovimentoDAO : IMovimentoDAO
     {
-        public int RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao) // Alterado para retornar int
+        public int RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao) 
         {
             using (var conexao = Banco.ObterConexao())
             {

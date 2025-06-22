@@ -11,24 +11,24 @@ namespace MIAUDOTE.Observer
     internal class AnimaisObserver : IObservableAnimal
     {
         private List<IObservadorAnimal> observadores = new List<IObservadorAnimal>(); // Lista para armazenar os observadores
-        private IAnimalDAO animalDAO; // Referência para o DAO de animais
+        private IAnimalDAO animalDAO; 
 
         public AnimaisObserver(IAnimalDAO animalDAO) // Construtor que recebe o AnimalDAO
         {
-            this.animalDAO = animalDAO; // Inicializa o AnimalDAO
+            this.animalDAO = animalDAO;
         }
 
-        public void AdicionarObservador(IObservadorAnimal observador) // Implementação do método da interface
+        public void AdicionarObservador(IObservadorAnimal observador) 
         {
-            observadores.Add(observador); // Adiciona um observador à lista
+            observadores.Add(observador); 
         }
 
-        public void RemoverObservador(IObservadorAnimal observador) // Implementação do método da interface
+        public void RemoverObservador(IObservadorAnimal observador) 
         {
-            observadores.Remove(observador); // Remove um observador da lista
+            observadores.Remove(observador); 
         }
 
-        public void NotificarObservadores(List<Animal> animaisAtualizados) // Implementação do método da interface
+        public void NotificarObservadores(List<Animal> animaisAtualizados) 
         {
             foreach (var observador in observadores) // Percorre todos os observadores
             {
@@ -39,19 +39,19 @@ namespace MIAUDOTE.Observer
         // Métodos que as operações que alteram a lista de animais chamarão e que notificarão os observadores
         public void MarcarAnimalComoAdotado(int animalId)
         {
-            animalDAO.MarcarComoAdotado(animalId); // Marca o animal como adotado no banco de dados
-            NotificarObservadores(animalDAO.BuscarDisponivel()); // Notifica os observadores com a lista atualizada de animais disponíveis
+            animalDAO.MarcarComoAdotado(animalId); 
+            NotificarObservadores(animalDAO.BuscarDisponivel()); 
         }
 
         public void DesmarcarAnimalAdocao(int animalId)
         {
             animalDAO.DesmarcarAdocao(animalId); // Desmarca o animal como adotado no banco de dados
-            NotificarObservadores(animalDAO.BuscarDisponivel()); // Notifica os observadores com a lista atualizada de animais disponíveis
+            NotificarObservadores(animalDAO.BuscarDisponivel()); 
         }
 
         public List<Animal> GetAnimaisDisponiveis()
         {
-            return animalDAO.BuscarDisponivel(); // Retorna a lista de animais disponíveis
+            return animalDAO.BuscarDisponivel(); 
         }
     }
 }
