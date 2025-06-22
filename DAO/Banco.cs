@@ -38,17 +38,16 @@ namespace MIAUDOTE.DAO
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             nome VARCHAR(100),
                             email VARCHAR(100),
-                            senha VARCHAR(100)
+                            senha INT(6)
                         );
 
-                        CREATE TABLE IF NOT EXISTS animal (
+                        CREATE TABLE IF NOT EXISTS animais (
                             id INT AUTO_INCREMENT PRIMARY KEY,
-                            nome VARCHAR(100),
                             tipo VARCHAR(50),
                             nome VARCHAR(100),
                             raca VARCHAR(50),
                             idade INT,
-                            descricao VARCHAR(100),
+                            descricao TEXT,
                             adotado BOOLEAN DEFAULT FALSE
                         );
 
@@ -56,9 +55,9 @@ namespace MIAUDOTE.DAO
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             id_usuario INT,
                             id_animal INT,
-                            data_adocao DATE,
-                            FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-                            FOREIGN KEY (id_animal) REFERENCES animal(id)
+                            data_adocao DATETIME,
+                            FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+                            FOREIGN KEY (id_animal) REFERENCES animais(id)
                         );
 
                         CREATE TABLE IF NOT EXISTS movimento (
@@ -67,9 +66,9 @@ namespace MIAUDOTE.DAO
                             id_animal INT,
                             tipo_operacao VARCHAR(50),
                             descricao TEXT,
-                            data_hora DATETIME
+                            data_hora DATETIME,
                             FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
-                            FOREIGN KEY (id_animal) REFERENCES animal(id)
+                            FOREIGN KEY (id_animal) REFERENCES animais(id)
                         );
                     ";
                         comando.ExecuteNonQuery();

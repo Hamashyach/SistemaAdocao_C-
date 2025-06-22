@@ -76,5 +76,28 @@ namespace MIAUDOTE.DAO
             if (usuario == null) return false;
             return usuario.Senha == senha;
         }
+
+        public void Atualizar(Usuario usuario) // Implementação do método Atualizar
+        {
+            try
+            {
+                using (var conexao = Banco.ObterConexao())
+                {
+                    string sql = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha WHERE id = @id";
+                    using (var cmd = new MySqlCommand(sql, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@nome", usuario.Nome);
+                        cmd.Parameters.AddWithValue("@email", usuario.Email);
+                        cmd.Parameters.AddWithValue("@senha", usuario.Senha);
+                        cmd.Parameters.AddWithValue("@id", usuario.Id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

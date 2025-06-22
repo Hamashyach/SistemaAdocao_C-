@@ -26,9 +26,10 @@ namespace MIAUDOTE
                 var movimentos = movimentoDAO.ListarPorUsuario(usuarioLogado.Id);
                 dgvHistoricoMovimentos.DataSource = movimentos;
 
-               
-                dgvHistoricoMovimentos.Columns["UsuarioId"].Visible = false; 
-                // Formatar a data para ser mais legível
+
+
+                dgvHistoricoMovimentos.Columns["UsuarioId"].Visible = false;
+                dgvHistoricoMovimentos.Columns["AnimalId"].Visible = false; // Oculta o ID do animal se não for relevante para o usuário
                 dgvHistoricoMovimentos.Columns["DataOperacao"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                 dgvHistoricoMovimentos.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
@@ -39,13 +40,9 @@ namespace MIAUDOTE
             }
         }
 
-
-       
-
         private void btnVoltar(object sender, EventArgs e)
         {
             this.Close();
-
         }
     }
 }

@@ -11,19 +11,18 @@ namespace MIAUDOTE.DAO
 {
     public class MovimentoDAO : IMovimentoDAO
     {
-        public void RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao) // Atualize a assinatura
+        public int RegistrarMovimento(int usuarioId, int animalId, string tipoOperacao, string descricao) // Alterado para retornar int
         {
             using (var conexao = Banco.ObterConexao())
             {
-                // Inclua id_animal no INSERT
-                string sql = "INSERT INTO movimento (id_usuario, id_animal, tipo_operacao, descricao, data_hora) VALUES (@usuarioId, @animalId, @tipo, @desc, NOW())";
+                string sql = "INSERT INTO movimento (id_usuario, id_animal, tipo_operacao, descricao, data_hora) VALUES (@usuarioId, @animalId, @tipo, @desc, NOW()); SELECT LAST_INSERT_ID();"; // Adicionado SELECT LAST_INSERT_ID()
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
-                    cmd.Parameters.AddWithValue("@animalId", animalId); // Adicione este parâmetro
+                    cmd.Parameters.AddWithValue("@animalId", animalId);
                     cmd.Parameters.AddWithValue("@tipo", tipoOperacao);
                     cmd.Parameters.AddWithValue("@desc", descricao);
-                    cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(cmd.ExecuteScalar()); // Retorna o ID gerado
                 }
             }
         }
@@ -45,7 +44,7 @@ namespace MIAUDOTE.DAO
                             {
                                 Id = reader.GetInt32("id"),
                                 UsuarioId = usuarioId,
-                                AnimalId = reader.GetInt32("id_animal"), // Leia o AnimalId
+                                AnimalId = reader.GetInt32("id_animal"),
                                 TipoOperacao = reader.GetString("tipo_operacao"),
                                 Descricao = reader.GetString("descricao"),
                                 DataOperacao = reader.GetDateTime("data_hora")

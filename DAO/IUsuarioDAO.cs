@@ -15,5 +15,6 @@ namespace MIAUDOTE.DAO
         void Inserir(Usuario usuario);
         Usuario BuscarPorNome(string nomeUsuario);
         bool Autenticar(string nomeUsuario, string senha);
+        void Atualizar(Usuario usuario);
     }
 }

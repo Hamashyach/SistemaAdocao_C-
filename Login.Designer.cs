@@ -47,6 +47,7 @@
             this.label1.Size = new System.Drawing.Size(217, 28);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nome de usuário";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -76,6 +77,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(313, 27);
             this.textBox2.TabIndex = 6;
+            this.textBox2.UseSystemPasswordChar = true;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1

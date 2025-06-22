@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MIAUDOTE.DAO;
 using MIAUDOTE.Models;
+using MIAUDOTE.Observer;
 
 namespace MIAUDOTE.Command
 {
@@ -15,23 +16,22 @@ namespace MIAUDOTE.Command
         private IAnimalDAO animalDAO;
         private IMovimentoDAO movimentoDAO;
         private int movimentoRegistradoId;
+        private IObservableAnimal observerAnimal;
 
         public string Descricao => $"Adoção do animal '{animal.Nome}'";
-        public AdotarAnimalCommand(Animal animal, int usuarioId, IAnimalDAO animalDAO, IMovimentoDAO movimentoDAO)
+        public AdotarAnimalCommand(Animal animal, int usuarioId, IAnimalDAO animalDAO, IMovimentoDAO movimentoDAO, IObservableAnimal observerAnimal)
         {
             this.animal = animal;
             this.usuarioId = usuarioId;
             this.animalDAO = animalDAO;
             this.movimentoDAO = movimentoDAO;
+            this.observerAnimal = observerAnimal;
         }
 
         public void Executar()
         {
             animalDAO.MarcarComoAdotado(animal.Id);
-            movimentoDAO.RegistrarMovimento(usuarioId, animal.Id, "Adoção", Descricao);
-
-            var movimentos = movimentoDAO.ListarPorUsuario(usuarioId);
-            movimentoRegistradoId = movimentos.Last().Id;
+            movimentoRegistradoId = movimentoDAO.RegistrarMovimento(usuarioId, animal.Id, "Adoção", Descricao); // Captura o ID
         }
 
         public void Desfazer()
@@ -42,6 +42,8 @@ namespace MIAUDOTE.Command
             {
                 movimentoDAO.RemoverMovimento(movimentoRegistradoId);
             }
+
+            observerAnimal.NotificarObservadores(animalDAO.BuscarDisponivel()); // Notifica os observadores com a lista atualizada de animais disponíveis
         }
     }
 }

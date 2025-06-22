@@ -118,6 +118,7 @@
             this.Perfil.TabIndex = 5;
             this.Perfil.Text = "Perfil";
             this.Perfil.UseVisualStyleBackColor = false;
+            this.Perfil.Click += new System.EventHandler(this.Perfil_Click); // Adicionado evento de clique
             // 
             // Histórico
             // 
