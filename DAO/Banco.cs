@@ -45,6 +45,8 @@ namespace MIAUDOTE.DAO
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             nome VARCHAR(100),
                             tipo VARCHAR(50),
+                            nome VARCHAR(100),
+                            raca VARCHAR(50),
                             idade INT,
                             descricao VARCHAR(100),
                             adotado BOOLEAN DEFAULT FALSE
